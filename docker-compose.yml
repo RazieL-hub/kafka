@@ -2,7 +2,7 @@ version: "3.3"
 
   zookeeper:
     image: 'bitnami/zookeeper:latest'
-    container_name: sofit-zookeeper
+    container_name: zookeeper
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
     ports:
