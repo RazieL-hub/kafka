@@ -2,6 +2,19 @@ version: "3.3"
 
 services:
 
+  postgres:
+    image: postgres:latest
+    container_name: sofit-postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - 'pgdata:/var/lib/postgresql/data'
+    networks:
+      - main
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+      POSTGRES_PASSWORD: "password"
+
   zookeeper:
     image: 'bitnami/zookeeper:latest'
     container_name: zookeeper
@@ -90,6 +103,7 @@ services:
       - worker
       - celery-flower
       - rabbitmq
+      - postgres
     volumes:
       - ".:/code"
     command: "uvicorn main:app --reload --host 0.0.0.0 --port 8000"
@@ -105,3 +119,4 @@ networks:
 
 volumes:
   rabbitmq_data:
+  pgdata:
