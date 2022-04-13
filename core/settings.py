@@ -1,6 +1,9 @@
 import os
+from functools import lru_cache
+
 from dotenv import load_dotenv
 from fastapi_mail import ConnectionConfig
+from pydantic import BaseSettings
 
 load_dotenv()
 
@@ -23,3 +26,15 @@ conf = ConnectionConfig(
 # CREDENTIALS for TELEGRAM
 BOT_TOKEN = os.getenv('BOT_TOKEN')
 CHAT_ID = os.getenv('CHAT_ID')
+
+
+class Settings(BaseSettings):
+    database_url: str
+
+    class Config:
+        env_file = ".env"
+
+
+@lru_cache
+def get_settings():
+    return Settings()
