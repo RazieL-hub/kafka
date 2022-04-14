@@ -1,11 +1,7 @@
 import datetime
 import logging
-from typing import List
-
-from fastapi import FastAPI, Query, Depends
+from fastapi import FastAPI, Depends
 from sqlalchemy import text
-from starlette.responses import JSONResponse
-from apps.telegram.send_message import send_message
 from core.celery import celery_app
 from db.querys import create_query as create_report
 
