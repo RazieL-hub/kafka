@@ -14,7 +14,11 @@ def json_serializer(data):
     return json.dumps(data).encode('utf-8')
 
 
-events = ['instant message', 'delayed message']
+events = ['эксплуатационный мониторинг состояний приборов учета',
+          'эксплуатационный мониторинг состояний УСПД и УКПКЭ',
+          'эксплуатационный мониторинг состояний каналов связи',
+          'эксплуатационный мониторинг состояний программного и аппаратного обеспечения',
+          'регистрация', 'обработка критических событий']
 action = ['sent', 'create_event']
 
 send_type = ['email', 'telegram', 'viber', 'what\'s app', 'odnoklassniki']
@@ -41,6 +45,7 @@ async def send_one():
     finally:
         # Wait for all pending messages to be delivered or expire.
         await producer.stop()
+        await sleep(1)
 
 
 while True:

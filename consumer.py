@@ -13,5 +13,4 @@ async def consume():
     finally:
         await consumer.stop()
 
-
 asyncio.run(consume())
