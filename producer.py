@@ -14,7 +14,8 @@ def json_serializer(data):
     return json.dumps(data).encode('utf-8')
 
 
-events = ['once a week', 'once a day', 'once a month', 'once a year']
+events = ['instant message', 'delayed message']
+action = ['sent', 'create_event']
 
 send_type = ['email', 'telegram', 'viber', 'what\'s app', 'odnoklassniki']
 
@@ -27,12 +28,13 @@ async def send_one():
     try:
         # Produce message
         data = {
+            'action': random.choice(action),
             'type_event': random.choice(events),
             'send_type': random.choice(send_type),
             'parameters': {
                 'email': os.getenv('MY_EMAIL'),
                 'CHAT_ID': os.getenv('CHAT_ID'),
-                'text': f'This is test text message {random.randrange(1, 100)} '
+                'text': f'This is test text message {random.randrange(1, 100)}'
             }
         }
         await producer.send_and_wait("test", data)
